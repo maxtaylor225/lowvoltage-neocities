@@ -1,0 +1,46 @@
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #fbfaf2;
+}
+.hr {
+    width: 70%;
+    margin:auto;
+    border-bottom: 3px solid rgb(0, 0, 0);
+    padding-top: 15px;
+}
+highlight {
+    background-color:rgba(93, 207, 22, 0.555); 
+}
+::-moz-selection, ::selection {
+    background-color: rgb(164, 15, 15) !important; 
+    color:rgb(255, 255, 255) !important;
+}
+#row-1, #row-2, #row-3, #row-4 {
+    height: fit-content;
+    width: fit-content;
+    overflow-wrap:normal;
+    padding: 15px;
+}
+#row-1 {
+    min-height: 300px;
+}
+#datahoardersam {
+    float: right;
+    margin: 5px; 
+    max-height: 500px;
+    height: 100%;
+}
+a {
+    text-decoration: none;
+    background:rgba(255, 206, 81, 0.847);
+    color:rgb(0, 0, 0);
+}
+#row-2-container {
+    display: flex;
+    flex-direction: row;
+}
+#row-2-container div {
+    width: 30%;
+    margin-right: 3%;
+}

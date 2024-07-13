@@ -1,0 +1,106 @@
+/*DO NOT REMOVE ATTRIBUTION
+* Max Taylor (maxtaylor255) 12-07-2024
+* This is a custom Supernatural Shrine webpage made for example purposes.
+*/
+:root {
+    --main-text-color: rgb(26, 3, 3);
+    --link-text-color: rgb(117, 2, 2);
+  }  
+body {
+    display: flex;
+    flex-direction: column;
+}
+.character-profile {
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 50%;
+    max-width: 500px;
+    height: 15%;
+}
+    .character-profile-wrapper {
+        display: flex;
+        flex-direction: row;
+    }
+        .character-profile-image { 
+            /*images that are not square--e.g. x*x dimensions--will result in unpredictable behaviour*/
+            max-width: 150px;
+            max-height: 150px;
+            overflow: hidden
+        }
+        .character-profile-image img {
+            max-height:100%;
+            /*border-radius: 50px;*/ /*for rounded/circular profiles*/
+            /*TODO: frame*/
+        }
+        .character-profile-blurb {
+            margin: 2px 2px 5px 5px;
+            width: 100%;
+            min-width: 200px;
+        }
+            .character-profile-blurb-title {
+                font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            }
+            .character-profile-blurb-inner {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+    .character-profile-track {
+        margin: 5px 5px;
+        overflow-y: hidden;
+        align-content: center;
+    }
+        .character-profile-track-text {
+            font-size: 15px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+.header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+    .header img {
+        max-width: 100%;
+    }
+.navigation {
+    display: none;
+}
+.photo {
+    border:1px solid pink;
+}
+    .photo-caption {
+        border:1px solid blue;
+        padding: 5px;
+        width: fit-content;
+        margin: auto;
+        display: block;
+    }
+    .photo img {
+        height: 90%;
+        margin: auto;
+        display: block;
+    }
+.resources {
+    border: 1px solid purple;
+    width: 35%;
+    max-width: 350px;
+    min-width: 250px;
+    height: 300px;
+    overflow-y: scroll;
+}
+    .resouces-name-span {
+        font-style: italic;
+        text-decoration: underline;
+    }
+        .resouces-name-span:hover {
+            color: var(--link-text-color);
+        }
+    .resources a {
+        text-decoration: none;
+        color: var(--main-text-color);
+    }
+#row-1, #row-2 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

@@ -1,0 +1,136 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+#row-2 ::-moz-selection, ::selection {
+    background:rgb(255, 255, 255) !important;
+    color:rgb(0, 0, 0) !important;
+}
+.button {
+    border-radius: 15px;
+    background-color: rgba(20, 86, 137, 0.453);
+    width:70%;
+    border: 1px solid white;
+    padding: 5px 5px;
+}
+.button input {
+    background-color: rgba(20, 86, 137, 0);
+    border:none;
+    color: white;
+}
+.button input:focus-visible {
+    outline:none;
+}
+
+#row-1 {
+    height: fit-content;
+    max-height: 30vh;
+    display: flex;
+    flex-direction: row;    
+    padding: 5px;
+    background: #1a1c269c;
+}
+#row-1-1 {
+    width: 80%;
+}  
+#row-1-2 {
+    width: 20%;
+    margin:0;
+}
+#row-1-2 ul {
+    list-style-type: none;
+    list-style-position: inside;
+}
+.circle {
+    height: 15px;
+    width: 15px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+#row-1 a {
+    text-decoration: none;
+    color: white;
+}
+@media screen and (max-height: 750px){
+    #row-1 {
+        overflow-y: scroll;
+    }
+}
+@media screen and (max-width: 1000px){
+    #row-1-2 ul {
+        position: relative;
+        left: -32px;
+        width: 95%;
+    }
+}
+
+#row-2 {
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+    min-height: 70vh;
+    max-height: 95vh;
+}
+#row-2-1, #row-2-2, #row-2-3 {
+    display: flex;
+    flex-direction: column;
+}
+#row-2-1 {
+    width: 21%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+#row-2-1 ul {
+    list-style-type: none;
+    position: relative;
+    left: -45px;
+}
+#row-2-1 ul li {
+    margin: 5px 0px 0px 0px;
+    padding: 15px;
+    border-radius: 15px;
+    width: 120%;
+    max-width: 15vw;
+}
+#row-2-1 ul li:hover {
+    background-color: rgba(20, 86, 137, 0.453);
+}
+.expandedpane {
+    display:none;
+    margin-left: 50px;
+    padding: 5px;
+    height: fit-content;
+    overflow: hidden;
+    width: 100%;
+    border-radius: 0 0 15px 15px;
+}
+@media screen and (max-width: 1000px){
+    .expandedpane {
+        width: 140%;
+    }
+}
+#row-2-2 {
+    width: 70%;
+    overflow: hidden;
+}
+#row-2-3 {
+    width: 15%;
+    overflow: hidden;
+}
+#row-2-3 #trendingtab {
+    list-style: none;
+    position: relative;
+    width: 80%;
+    padding: 5px 15px ;
+    border-radius: 5px;
+    height: 50vh;
+}
+#row-2-3 #trendingtab ul {
+    list-style-type: none;
+    position: relative;
+    left: -20px;
+}
+#row-2-3 #trendingtab ul li {
+    text-decoration: underline;
+}
