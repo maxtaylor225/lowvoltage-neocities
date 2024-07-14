@@ -1,0 +1,39 @@
+body {
+    flex-direction: column;
+    height: 100%;
+}
+#row-1 { /*Navigation?*/
+    flex-direction: row;
+    height: 30px;
+    /*border: 1px solid red;*/
+}
+#row-2 { /*Terminal*/
+    flex-direction: row;
+    width: 80%;
+    height: 80vh;
+    margin: auto;
+
+    background-color: #1a1c1a;
+    border: 1px solid rgb(60, 91, 59);
+    overflow-y: scroll;
+}
+#row-2 ::-moz-selection, ::selection {
+    background:rgb(255, 255, 255) !important;
+    color:rgb(0, 0, 0) !important;
+}
+#row-2 a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.708);
+}
+#row-3 { /*Options*/
+    margin-left: 10%;
+}
+.terminal-text {
+    list-style-type: "C:\\neocities\\Users\\low-voltage\\Home>";
+    list-style-position: inside;
+    margin-left: -20px;
+    font-family:'Courier New', Courier, monospace;
+}
+.terminal-text li {
+    color: rgb(45, 224, 17);
+}

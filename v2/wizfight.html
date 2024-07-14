@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Low Voltage: WizFight</title>
+    <link rel="icon" type="image/x-icon" href="/Images/wizard.png">
+    <link rel="stylesheet" href="wizfight.css">
+  </head>
+
+  <body>	
+<div class="navigation">
+  <div><a href="../index.html">      <img src="./Images/hellboyhome.jpg"/>   <p>Home</p></a></div>
+  <div><a href="../index.html">   <img src="./Images/hellboyplants.jpg"/>  <p>Music (WIP)</p></a></div>
+  <div><a href="">      <img src="./Images/hellboyyellow.jpg"/>   <p>WizFight (you are here)</p></a></div>
+  <div><a href="../index.html"><img src="./Images/hellboyorange.jpg"/>   <p>Wizardquest™ (Coming soon)</p></a></div>
+  <div><a href="../index.html">    <img src="./Images/hellboyhydra.jpg"/>      <p>Status updates</p></a></div>
+</div>
+<div id="wizfightmain">
+    <div id="about">
+        <div>
+          <h3 id="Title">Stats</h3>
+          <ul>
+            <li>💚 Your health: <span id="yourhp">N/A</span></li>
+            <li>❤ <span id="wizname">???</span>'s health: <span id="wizhp">N/A</span></li>
+            <li>💥 Moves made: <span id="moves">0</span></li>
+            <li>👑: <span id="winner">N/A</span></li>
+            <li>🔮 Temperament: <span id="temperament">???</span></li>
+            <li>🩸 Sanguine: <span id="sanguine">0</span>%</li>
+            <li>🧄 Choleric: <span id="choleric">0</span>%</li>
+            <li>🦪 Phlegmatic: <span id="phlegmatic">0</span>%</li>
+            <li>🐌 Melancholic: <span id="melancholic">0</span>%</li>
+            <li>🍏 Poison Laser Beams: <span id="plba">0</span></li>
+            <li>🗯 Baja Baka Blasts: <span id="bbb">0</span></li>
+            <li>🦧 Lesser Ketamine Apes: <span id="lka">0</span></li>
+            <li>🦧 Greater Ketamine Apes: <span id="gka">0</span></li>
+            <li>😢 Crying Sessions: <span id="cry">0</span></li>
+            <li>🩹 Hello Kitty Bandaids Applied: <span id="ahkb">0</span></li>
+            <li>🐸?: <span id="toad">N</span></li>
+            <li>👨‍👦 Good parenting: <span id="goodparent">N/A</span></li>
+            <li>🐊 Beloved by alligators: <span id="alligator">N</span></li>
+            <li>🧍‍♂️ Homunculi: <span id="homunculi">0</span></li>
+            <li>👼 Virgin birth: <span id="virginbirth">N</span></li>
+            <li>🍷 Potions drunk: <span id="potions">0</span></li>
+            <li>🌈🧙‍♂️: <span id="biwiz">?</span></li>
+            <li>🐟 Cods: <span id="cod">0</span></li>
+            <li>💍 Rings: <span id="ring">0</span></li>
+          </ul>
+        </div>
+      </div>
+<div id="playingfield">
+<div id="game">
+<h1 style="color:rgb(60, 91, 59);" id="startsplash" onclick="init()">
+    Click to begin
+</h1>
+</div>
+<button id="nextbutton" style="display:none;" onclick="clicks = clicks+1;next()">Next ▶</button>
+<br><br>
+</div>
+</div>
+<br><br>
+<div id="banner">
+    <ul>
+      <li><img src="./Images/book.png" style="height: 25px;"/>This is a personal page run by some random on the Internet. 
+        This page last updated 2023. <img src="./Images/mushies.png" style="height: 25px;"/>
+      </li>
+    </ul>
+  </div>
+</body>
+
+<script>
+/*Displayable stats*/
+var wizhp = 25;
+var yourhp = 15;
+var wizname = "Anthrax";
+var yourname = "Jocaster";
+var moves = 0;
+
+/*Logic*/
+var clicks = 0;
+var choice = 0;
+var yourturn = -1;
+var ongoing = 1;
+
+/*Events*/
+var somethingrotten = 0;
+  var toaddad = 0;
+  var allifriend = "N";
+  var homnum = 0;
+  var weirdcod = 0;
+  var toaddadbad = 0;
+  var app = 0;
+  var toadnameson = "N/A";
+
+let game = document.getElementById("game");
+function dialogue (text, type) {
+  var output = "<p class='"+type+"'>"+text+"</p>";
+  game.insertAdjacentHTML("beforeend", output);
+}
+function hp() {
+  if (wizhp < 0) {
+	  wizhp = 0;
+	}
+	if (yourhp < 0) {
+		yourhp = 0;
+	}
+  document.getElementById("yourhp").innerHTML = yourhp;
+  document.getElementById("wizhp").innerHTML = wizhp;
+  return;
+}
+function next() {
+  if (clicks == 1) {
+    dialogue("WHAT IS YOUR NAME, YOUNG WIZARD?", "wiztext");
+    var output = "<form><input type='text' id='yourname'/></form>";
+    game.insertAdjacentHTML("beforeend", output);
+    document.getElementById("nextbutton").scrollIntoView({behavior:"smooth"});
+  }
+  if (clicks==2) {
+    name = document.getElementById("yourname").value;
+    if (name == "" || name==" ") {
+      dialogue("STOP PLAYING SILLY BUGGERS. IF YOU WON'T TAKE THIS SERIOUSLY I'LL ASSIGN YOU A NAME. YOU'RE "+yourname.toUpperCase() +" NOW.", "wiztext");
+    } else {
+      yourname = name;
+      clicks = clicks+1;
+      dialogue("You said: "+ yourname +".", "narration");
+    }
+    document.getElementById("nextbutton").scrollIntoView({behavior:"smooth"});
+  }
+  if (clicks==3) {
+    document.getElementById("Title").innerHTML = "Stats for " + yourname;
+    dialogue("WELCOME, " + yourname.toUpperCase() + ".", "wiztext");
+    document.getElementById("nextbutton").scrollIntoView({behavior:"smooth"});
+  }
+  if (clicks==4) {
+    dialogue("PREPARE TO DIE!", "wiztext");
+    dialogue("The magician "+ wizname+" wants to battle!", "narration");
+    document.getElementById("nextbutton").scrollIntoView({behavior:"smooth"});
+  }
+  if ((yourhp == 0 || wizhp == 0) && ongoing) {
+    dialogue(yourname +": "+yourhp+"hp", "end");
+    dialogue(wizname +": "+wizhp+"hp", "end");
+    //yourhp = 0; wizhp = 0; //testing
+    if (yourhp == 0 && wizhp == 0) {
+      dialogue("YOU HAVE FOUGHT SURPRISINGLY WELL, YOUNG WIZARD "+ yourname +".", "wiztext");
+      dialogue("I hope you realise I can't let you in.", "wiztext");
+      dialogue("DON'T COMPLAIN!", "wiztext");
+      dialogue("I don't make the rules.", "wiztext");
+      dialogue("...........................", "wiztext");
+      dialogue("I suppose, though... I am in need of an apprentice...", "wiztext");
+      dialogue("What about it?", "wiztext");
+      const button1 = "<button onclick='app=1; next();'>1. Yes</button>";
+      const button2 = "<button onclick='app=0; next();'>2. No</button>";
+      var output = "<span id='apprenticing'>"+ button1 + "<br>" + button2 + " </span>";
+      game.insertAdjacentHTML("beforeend", output);
+      document.getElementById("nextbutton").style.display = "none";
+      document.getElementById("apprenticing").scrollIntoView({behavior:"smooth"});
+      document.getElementById("winner").innerHTML = "Draw";
+      somethingrotten = 1;
+    }
+    else if (yourhp == 0) {
+      dialogue("HAHAHAHAHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHAHAHAH!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", "wiztext");
+      dialogue("I WIN! I WIN!", "wiztext");
+      dialogue("BWAHAHAHHAHHAHWHAWHWABWHAWHAWHHWHWAHWHWHWHWHAWHWHWHHWHWHAWHWH!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", "wiztext");
+      dialogue("BETTER LUCK NEXT TIME, YOUNG WIZARD " + yourname.toUpperCase() + "!", "wiztext");
+      document.getElementById("nextbutton").scrollIntoView({behavior:"smooth"});
+      document.getElementById("nextbutton").style.display = "none";
+      document.getElementById("winner").innerHTML = wizname;
+      const button = "<button>GAME OVER. Play again?</button>";
+      var output = "<a href=''><span id='theend'>"+ button + " </span></a>";
+      game.insertAdjacentHTML("beforeend", output);
+    } 
+    else if (wizhp == 0) {
+      dialogue("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", "wiztext");
+      dialogue("MOTHER ALWAYS SAID I WOULD BE A FAILURE....", "wiztext");
+      dialogue(wizname + " has started crying.", "narration");
+      dialogue(yourname.toUpperCase() + " HAS WON! YOU MAY NOW ENTER THE WIZARD ACADEMY!", "narration");
+      dialogue("(But at what cost......... ? )", "narration");
+      document.getElementById("nextbutton").scrollIntoView({behavior:"smooth"});
+      document.getElementById("nextbutton").style.display ='none';
+      document.getElementById("winner").innerHTML = yourname;
+      const button = "<button>GAME OVER. Play again?</button>";
+      var output = "<a href=''><span id='theend'>"+ button + " </span></a>";
+      game.insertAdjacentHTML("beforeend", output);
+    }
+    ongoing = 0;
+  }
+  else if (somethingrotten && !ongoing) {
+    if (app) {
+      dialogue("Oh, good!--I mean, oh. Excellent. Glad to hear.", "wiztext");
+      dialogue("I'm glad to have you aboard, as it were, "+ yourname + ".", "wiztext");
+      dialogue("I'm a strict master, but I'll pull you into shape in no time! Before you know it you'll be a master wizard--like ME!", "wiztext");
+    } else if (!app) {
+      dialogue("Good luck out there, "+ yourname + ". I hope you find what you're looking for.", "wiztext");
+    }
+    somethingrotten = 0;
+    document.getElementById("nextbutton").scrollIntoView({behavior:"smooth"});
+    const button = "<button>GAME OVER. Play again?</button>";
+    var output = "<a href=''><span id='theend'>"+ button + " </span></a>";
+    game.insertAdjacentHTML("beforeend", output);
+    document.getElementById("theend").scrollIntoView({behavior:"smooth"});
+  }
+  else if (somethingrotten && clicks > 4 && ongoing) {
+    if (allifriend == "Y") {
+      document.getElementById("alligator").innerHTML = "Y";
+      allifriend = "N";
+      dialogue("BY A FLUKE, THE ALLIGATOR TAKES A LIKING TO YOU! WHAT A MORALE BOOST!", "narration");
+      yourhp = yourhp + 4;
+      dialogue("+4!", "damp");
+      somethingrotten = 0;
+    }
+    else if (homnum == -1) {
+      homnum = document.getElementById("homnumfield").value;
+      document.getElementById("homunculi").innerHTML = homnum;
+      dialogue("YOU SAID: "+ homnum, "narration");
+      var homnumfield = document.getElementById("homnumfield");
+      homnumfield.remove();
+      if (homnum <1 || homnum == " " || homnum == "") {
+        dialogue("NICE TRY, "+yourname.toUpperCase()+", BUT IT'S NOT ZERO.", "narration");
+        dialogue("THE HOMUNCULI SENSE YOUR YOUR WEAKNESS. THEY GRAB YOU BY THE ANKLES AND DIP YOU INTO THE BLOOD RIVER. NOW YOU'RE ALL SLIPPERY, LIKE A PERVERTED COD.", "narration");
+        var dam = 1+(Math.floor(Math.random() * 37)%3);
+        yourhp = yourhp - dam;
+        dialogue("-"+dam+"!", "damn");
+        somethingrotten = 0;
+        homnum = 0;
+      }
+      else if (homnum == 1) {
+        dialogue("DO YOU REALLY THINK THE MAGICIAN WOULD ONLY SEND OUT ONE AND IT'D BE A PUSHOVER? THIS HOMUNCULUS IS BUILT LIKE A GORILLA-ORC. A GORC. HE TAKES YOU TO TOWN.", "narration");
+        dam = 5;
+        yourhp = yourhp - dam;
+        dialogue("-"+dam+"!", "damn");
+        somethingrotten = 0;
+        homnum = 0;
+      }
+      else if (homnum%5 == 0) {
+        dialogue("THAT'S TOO MANY! THEY'RE OVERPOWERING YOU! YOU GO UNDER IN THE SWARM OF HOMUNCULI!", "narration");
+        dialogue("ONE OF THE HOMUNCULI LOOKS YOU SQUARE IN THE EYE.", "narration");
+        dialogue("HEY, ASSHOLE! I HEAR YOU'VE BEEN A TOOL TO THE TOAD!", "homunculus");
+        const button1 = "<button onclick='homnum=1; next();'>1.What toad?</button>";
+        const button2 = "<button onclick='homnum=2; next();'>2. I'm sorry.</button>";
+        const button3 = "<button onclick='homnum=3; next();'>3. I'm not sorry. Fuck them kids. I'm busy getting an education.</button>";
+        var output = "<span id='homchoices'>"+ button1 + "<br>" + button2 + "<br>" + button3 +" </span>";
+        game.insertAdjacentHTML("beforeend", output);
+        document.getElementById("nextbutton").style.display = "none";
+        document.getElementById("homchoices").scrollIntoView({behavior:"smooth"});
+      }
+      else if (homnum%2 == 0) {
+        dialogue("THEY SPLIT UP TO GRAB YOU BY THE LEGS, AND THEY DRAG YOUR FEET IN OPPOSITE DIRECTIONS. THE GOOD NEWS IS THAT THIS IS THE BIGGEST SPLIT YOU'VE EVER DONE. YOUR YOGA TEACHER WOULD BE PROUD. THE BAD NEWS IS THAT THIS HURTS LIKE A BITCH!", "narration");
+        dam = 2;
+        yourhp = yourhp - dam;
+        dialogue("-"+dam+"!", "damn");
+        somethingrotten = 0;
+        homnum = 0;
+      }
+			else {
+        dialogue("THESE ODDS AREN'T GREAT! FORTUNATELY THE HOMUNCULI HAVE DECIDED TO PICK NOW TO UNIONISE. SOME OF THEM STILL GO FOR IT, BUT MOST OF THEM ARE SITTING THIS OUT!", "narration");
+        dialogue("'We want better pay and better hours', one of the homunculi says. He's wearing a stained tabard with what looks suspiciously like blood or chocolate syrup down the front.", "narration");
+        dialogue("I DON'T PAY YOU AT ALL!", "wiztext");
+        dialogue("YOU FEEL FOR THE HOMUNCULI, BUT THOSE REMAINING (SCABS) ARE BEING REALLY PAINFUL, SO YOU'RE DISTRACTED.", "narration");
+        dam = 1;
+        yourhp = yourhp - dam;
+        dialogue("-"+dam+"!", "damn");
+        dialogue("THE GOOD NEWS IS THAT THE WIZARD CAN'T AFFORD FOR THEM ALL TO GO ON STRIKE AT THE MOMENT, SO THEY SUCCESSFULLY UNIONISE!", "narration");
+        dam = 3;
+        wizhp = wizhp - dam;
+        dialogue("-"+dam+"!", "damn");
+        somethingrotten = 0;
+        homnum = 0;
+			}
+    }
+    else if (homnum != 0) {
+      const homchoicesbuttons = document.getElementById("homchoices");
+      homchoicesbuttons.remove();
+      var toadmeet = document.getElementById("toad").innerHTML;
+      document.getElementById("nextbutton").style.display = "block";
+      if (toaddadbad == 1) { //if youve met the toad and been a dick
+        if (homnum == 1) {
+          dialogue("DON'T 'WHAT TOAD' ME! I KNOW WHAT YOU'VE SAID TO THEM!", "homunculus");
+          dam = 3;
+          yourhp = yourhp - dam;
+          dialogue("-"+dam+"!", "damn");
+          dialogue("OUCH! PARENTAL RESPONSIBILITY HURTS!.", "narration");
+          document.getElementById("goodparent").innerHTML = "Very much not.";
+        } else if (homnum == 2) {
+          dialogue("You said: I'm sorry.", "narration");
+          dialogue("Her face softens.", "narration");
+          dialogue("They miss you.", "homunculus");
+          dialogue("You start to cry.", "narration");
+          dialogue("I never meant to hurt them...", "you");
+          dialogue("I DON'T UNDERSTAND WHAT'S GOING ON BUT I AM UNCOMFORTABLE WHEN WE ARE NOT ABOUT ME?", "wiztext");
+          dialogue("The homunculus shushes "+ wizname + ".", "narration");
+          dialogue("I don't know how they will ever forgive me.", "you");
+          dialogue("You see the toad watching you from Blood Forest. You wave sadly at them. They wave back.", "narration");
+          dialogue("I'm sorry.", "you");
+          dialogue("The toad knows. That doesn't mean you're owed forgiveness. But they appreciate your apology.", "narration");
+          document.getElementById("goodparent").innerHTML = "Getting better";
+        } else if (homnum == 3) {
+          dialogue("You said: I'm not sorry. Fuck them kids. I'm busy getting an education.", "narration");
+          dialogue("You hear sobbing coming from Blood Forest.", "narration");
+          dialogue("THE HOMUNCULUS ATTACKS YOUR ANKLE WITH A CURSED SPORK SHE PICKED UP FROM SOMEWHERE!", "narration");
+          dam = 4;
+          yourhp = yourhp - dam;
+          dialogue("-"+dam+"!", "damn");
+          document.getElementById("goodparent").innerHTML = "Wow, you suck.";
+        }
+      } else if (toaddadbad == 0 && toadmeet != "N") { //if you have met the toad but not been a dick
+        if (homnum == 1) {
+          dialogue("You said: What toad?", "narration");
+          dialogue("YOU KNOW WHAT TOAD I'M TALKING ABOUT! THE ONE IN YOUR POCKET!", "homunculus");
+          dialogue("You pull your goopy son from your pocket.", "narration");
+          dialogue(toadnameson +", is this true?", "you");
+          dialogue(toadnameson +" says that they vented to the homunculus in a fit of frustration. 'I feel like you're overbearing sometimes,' they say. 'I didn't mean to hurt you.'", "narration");
+          dialogue("You say you're sorry too. You're just under a lot of stress right now. There's a magician trying to stop you from achieving higher education, and you feel like most schools don't make you fight your way in.", "narration");
+          dialogue("I'm glad you've made up.", "homunculus");
+          dialogue("SO GLAD, IN FACT, THAT SHE SNEAKS YOU A SMALL BOTTLE OF GLOWING GREEN LIQUID. YOU HATE TO BE RUDE SO YOU DRINK IT.", "narration");
+          dam = 4;
+          yourhp = yourhp + dam;
+          dialogue("+"+dam+"!", "damp");
+          document.getElementById("goodparent").innerHTML = "One of the best";
+        } else if (homnum == 2) {
+          dialogue("You said: I'm sorry.", "narration");
+          dialogue("You're not entirely sure what for, but kids are tumtuous at this time in their lives. You just hope that if "+ toadnameson+ " has anything they need to say, they won't hesitate to tell you.", "narration");
+          document.getElementById("goodparent").innerHTML = "Very good";
+          dialogue("The homunculus sees your expression.", "narration");
+          dialogue("I KNOW HOW IT IS. I DON'T HAVE KIDS, BUT MY PARENTS WERE NEVER REALLY THERE SO I STOOD IN FOR THEM FOR MY LITTLE SISTER. IT'S TOUGH, BUT YOU'LL GET THROUGH IT. I WISH YOU ALL THE BEST.", "homunculus");
+          dialogue("You appreciate her words. It gives you a little warm glow of hope.", "narration");
+          dam = 1;
+          yourhp = yourhp + dam;
+          dialogue("+"+dam+"!", "damp");
+        } else if (homnum == 3) {
+          dialogue("You said: I'm not sorry. Fuck them kids. I'm busy getting an education.", "narration");
+          dialogue("YOUR POCKET STARTS CRYING.", "narration");
+          dialogue("'I knew you didn't love me,' "+toadnameson +" weeps. 'You're always so busy with this duel that you never notice me. I thought that maybe if someone else brought it up you'd realise, but you clearly don't love me. I'm running away.'", "narration");
+          dialogue("Your goopy son jumps out of your pocket and with a wet slap of feet runs away into the blood forest. The homunculus can't even bring herself to hit you. She just stands there, in awe of your dickery.", "narration");
+          dialogue("WE DON'T HAVE CHILDCARE SERVICES AT THIS SCHOOL--NOT THAT YOU'LL BE GETTING IN!", "wiztext");
+          toaddadbad = 1;
+          document.getElementById("goodparent").innerHTML = "What the fuck is wrong with you?";
+          dam = 3;
+          yourhp = yourhp - dam;
+          dialogue("-"+dam+"!", "damn");
+          dialogue("Ouch. Dick.", "narration");
+        }
+      } 
+       else if(toadmeet == "N") { //you haven't met the toad 
+        if (homnum == 1) {
+          dialogue("You said: What toad?", "narration");
+          dialogue("DON'T 'WHAT TOADS' ME! I KNOW WHAT YOU'VE SAID TO THEM!", "homunculus");
+          dam = 1;
+          yourhp = yourhp - dam;
+          dialogue("-"+dam+"!", "damn");
+          dialogue("OUCH! SHE HIT YOU! YOU DIDN'T EVEN KNOW YOU WERE A PARENT! (IS THIS A VIRGIN BIRTH? IS THAT TOAD JESUS? DO YOU HAVE A JESUS SON TOAD RUNNING AROUND SOMEWHERE?)", "narration");
+          document.getElementById("virginbirth").innerHTML = "Yes, maybe?";
+        } else if (homnum == 2 || homnum == 3) {
+          if(homnum==2) {
+            dialogue("You said: I'm sorry.", "narration");
+          } else {
+            dialogue("You said: I'm not sorry. Fuck them kids. I'm busy getting an education.", "narration");
+          }
+          dialogue("THE HOMUNCULUS GLOWERS.", "narration");
+          dialogue("YOU DON'T EVEN KNOW WHO I'M TALKING ABOUT!", "homunculus");
+          dialogue("WELL, SHE DID ASK. IT'S KIND OF BAD TO AGREE BLINDLY WITH EVERYTHING SOMEONE SAYS, THOUGH. YOU NEED TO BE MORE ASSERTIVE.", "narration");
+          dam = 3;
+          yourhp = yourhp - dam;
+          dialogue("-"+dam+"!", "damn");
+        }
+      }
+      homnum = 0;
+      somethingrotten = 0;
+    }
+    else if (toaddad == 1)  { 
+      document.getElementById("toad").innerHTML = "Y";
+      dialogue("The toad is... kind of adorable.", "narration");
+      dialogue("So bloody. So toady. So Superior.", "narration");
+      dialogue("Name your son?", "narration");
+      const button1 = "<button onclick='toaddad=2; next();'>1. Yes. I love my goopy son!</button>";
+      const button2 = "<button onclick='toaddad=3; next();'>2. They're no son of mine.</button>";
+        var output = "<span id='toadchoices'>"+ button1 + "<br>" + button2 + " </span>";
+        game.insertAdjacentHTML("beforeend", output);
+        document.getElementById("nextbutton").style.display = "none";
+        document.getElementById("toadchoices").scrollIntoView({behavior:"smooth"});
+    } 
+    else if (toaddad==2) {
+      dialogue("You said: Yes. I love my goopy son!", "narration");
+      document.getElementById("nextbutton").style.display = "block";
+      dialogue("NAME YOUR SON:", "narration");
+      var output = "<form><input type='text' id='sonname'/></form>";
+      game.insertAdjacentHTML("beforeend", output);
+      document.getElementById("nextbutton").scrollIntoView({behavior:"smooth"});
+      toaddad = 4;
+    } 
+    else if (toaddad==3) {
+      dialogue("You said: They're no son of mine.", "narration");
+      const toadchoicesbuttons = document.getElementById("toadchoices");
+      toadchoicesbuttons.remove();
+      document.getElementById("nextbutton").style.display = "block";
+      dialogue("'All I've ever wanted is for someone to love me!'', the toad sobs.", "narration");
+      dialogue("Before you can say anything, they've leapt off your hand and is running away into the Blood Forest.", "narration");
+      dialogue("You're a really unpleasant person, " + yourname + ". I hope you know that.", "narration");
+			yourhp = yourhp-1;
+      dialogue("-1!", "damn");
+      somethingrotten = 0;
+      toaddad = 0;
+      toaddadbad = 1;
+      document.getElementById("goodparent").innerHTML = "No. Wow, you're horrible.";
+    }
+    else if (toaddad==4) {
+      const toadchoicesbuttons = document.getElementById("toadchoices");
+      toadchoicesbuttons.remove();
+      document.getElementById("nextbutton").style.display = "block";
+      let name = document.getElementById("sonname").value;
+      toadnameson = name;
+      const toadnamebuttons = document.getElementById("sonname");
+      toadnamebuttons.remove();
+      if (name == "" || name == " " || name.length % 2 == 1) {
+        dialogue("Uh oh.", "narration");
+        dialogue("The toad doesn't like that name.", "narration");
+        dialogue("The toad doesn't like that name at ALL.", "narrationbad");
+        dialogue("Now you've made the toad angry...", "narrationbad");
+        toaddadbad = 1;
+        document.getElementById("goodparent").innerHTML = "No, apparently";
+      } else if (name.length % 2 == 0) {
+        dialogue(name + " loves their new name! You put them in your pocket, a little happier about life.", "narration");
+        var dam = (name.length % 3) + 1;
+        yourhp = yourhp + dam;
+        dialogue("+"+dam+"!", "damp");
+        document.getElementById("goodparent").innerHTML = "Yes";
+      }
+      somethingrotten = 0;
+      toaddad = 0;
+    }
+    else if (weirdcod == 1) {
+      var codcount = parseInt(document.getElementById("cod").innerHTML);
+      codcount = codcount + 1;
+      document.getElementById("cod").innerHTML = codcount;
+      dialogue("THE COD LOOKS AT YOU WITH GREAT, GLOSSY EYES. YOU LEAN IN.", "narration");
+      dialogue("Hey kid... If you stroke my belly I'll give you a boost.", "cod");
+      dialogue("Trust the cod?", "narration");
+      const button1 = "<button onclick='weirdcod=2; next();'>1. Yes</button>";
+      const button2 = "<button onclick='weirdcod=3; next();'>2. No</button>";
+        var output = "<span id='codchoices'>"+ button1 + "<br>" + button2 + " </span>";
+        game.insertAdjacentHTML("beforeend", output);
+        document.getElementById("nextbutton").style.display = "none";
+        document.getElementById("codchoices").scrollIntoView({behavior:"smooth"});
+    } 
+    else if (weirdcod > 1) {
+      const codchoicesbuttons = document.getElementById("codchoices");
+      codchoicesbuttons.remove();
+      document.getElementById("nextbutton").style.display = "block";
+      if (weirdcod == 2) {
+        dialogue("You said: Yes", "narration");
+        dialogue("YOU KNEEL AND STROKE THE COD'S BELLY. HE SIGHS GROSSLY, AND YOU START TO REGRET THIS CHOICE.", "narration");
+        dialogue("What is it with you and these weird life choices, "+ yourname +"?", "narration");
+        var codmod = Math.floor(Math.random() * 15);
+        if (codmod%2==0) {
+          dialogue("YOUR HAND IS COVERED WITH COD GOOP. YOU HAVE NOTHING TO SHOW FOR IT.", "narration");
+          dialogue("I can't believe you did that. What is even wrong with you?", "narration");
+          dialogue("That's got to be a blow to your ego.", "narration");
+          var dam = 1;
+			    yourhp = yourhp - dam;
+          dialogue("-"+dam+"!", "damn");
+          dialogue("I CAN NOT BELIEVE YOU DID THAT. THAT'S HILARIOUS!", "wiztext");
+          dialogue("SO HILARIOUS IT REJUVENATES HIM.", "narration");
+          var dam = 3;
+			    wizhp = wizhp + dam;
+          dialogue("+"+dam+"!", "damp");
+        } else {
+          dialogue("THE COD IS SIGHING SO HAPPILY THAT HE STARTS TO COUGH.", "narration");
+          dialogue("A GOLDEN RING FLIES FROM HIS MOUTH. IT'S COVERED WITH COD DROOL, WHICH IS GROSS, BUT YOU PUT IT ON.", "narration");
+          var ringscount = parseInt(document.getElementById("ring").innerHTML);
+          ringscount = ringscount + 1;
+          document.getElementById("ring").innerHTML = ringscount;
+          dialogue("IT GIVES YOU A BOOST! YOU FEEL THAT IT'S FULL OF POWERFUL MAGIC...", "narration");
+          var dam = codmod%weirdcod+2;
+			    yourhp = yourhp + dam;
+          dialogue("+"+dam+"!", "damp");
+        }
+      } else if (weirdcod == 3) {
+        dialogue("You said: No", "narration");
+        dialogue("The cod sniffs.", "narration");
+        dialogue("Your loss, kid.", "cod");
+      }
+      weirdcod = 0;
+      somethingrotten = 0;
+    }
+    hp();
+    document.getElementById("nextbutton").scrollIntoView({behavior:"smooth"});
+  }
+  else if (choice==0 && clicks > 4 && ongoing) {
+  const vals = "moves = moves+1; clicks=clicks+1; yourturn = 1; next();";
+  const button1 = "<button onclick='choice=1;"+ vals + "'>1. POISON LASER BEAM ATTACK</button>";
+  const button2 = "<button onclick='choice=2;"+ vals + "'>2. BAJA BAKA BLAST</button>";
+  const button3 = "<button onclick='choice=3;"+ vals + "'>3. LESSER KETAMINE APE</button>";
+  const button4 = "<button onclick='choice=4;"+ vals + "'>4. CRY</button>";
+  const button5 = "<button onclick='choice=5;"+ vals + "'>5. APPLY HELLO KITTY BANDAID</button>";
+  var output = "<span id='choices'>"+ button1 + "<br>" + button2 + "<br>" + button3 + "<br>" + button4 + "<br>" + button5 +" </span>";
+  game.insertAdjacentHTML("beforeend", output);
+  document.getElementById("nextbutton").style.display = "none";
+  document.getElementById("choices").scrollIntoView({behavior:"smooth"});
+  }
+  else if (clicks > 4 && yourturn == 1 && ongoing) {
+    const buttons = document.getElementById("choices");
+    buttons.remove();
+    document.getElementById("moves").innerHTML = moves;
+    document.getElementById("nextbutton").style.display = "block";
+    //Your turn
+    var randmod = Math.floor(Math.random() * 1000000000001);
+    if (choice == 1) {
+      dialogue(yourname.toUpperCase() + " USED POISON LASER BEAM ATTACK!", "narration");
+      var movetype = parseInt(document.getElementById("plba").innerHTML);
+      movetype = movetype + 1;
+      document.getElementById("plba").innerHTML = movetype;
+      if (randmod % 11113 == 0) { 
+				wizhp = wizhp - 69;	
+        dialogue("-69!", "damn");	
+			}	
+			else if (randmod % 5 == 0) {
+				wizhp = wizhp - 3;
+        dialogue("-3!", "damn");
+			}
+			else if (randmod % 2 == 0) {
+				wizhp = wizhp - 2;
+        dialogue("-2!", "damn");
+			}
+			else {
+				wizhp = wizhp - 1;
+        dialogue("-1!", "damn");
+			}
+    } else if (choice == 2) {
+      dialogue(yourname.toUpperCase() + " USED BAJA BAKA BLAST!", "narration");
+      var movetype = parseInt(document.getElementById("bbb").innerHTML);
+      movetype = movetype + 1;
+      document.getElementById("bbb").innerHTML = movetype;
+      if (randmod % 1113 == 0) {
+        wizhp = wizhp - 13;
+        dialogue("-13!", "damn");
+      }
+      else if (randmod % 3 == 0) {
+        wizhp = wizhp - 4;
+        dialogue("-4!", "damn");
+      }
+      else if (randmod % 2 == 0) {
+        wizhp = wizhp - 1;
+        dialogue("-1!", "damn");
+      }
+      else {
+        wizhp = wizhp - 2;
+        dialogue("-2!", "damn");
+      }
+    } else if (choice == 3) { 
+      var movetype = parseInt(document.getElementById("lka").innerHTML);
+      movetype = movetype + 1;
+      document.getElementById("lka").innerHTML = movetype;
+      dialogue(yourname.toUpperCase() + " USED LESSER KETAMINE APE!", "narration");
+      if (randmod % 5 == 0) {
+				wizhp = wizhp - 0;
+        dialogue("-0!", "damn");
+			}
+			else {
+				wizhp = wizhp - 3;
+        dialogue("-3!", "damn");
+			}
+    } else if (choice == 4) {
+      dialogue(yourname.toUpperCase() + " USED CRY!", "narration");
+      var movetype = parseInt(document.getElementById("cry").innerHTML);
+      movetype = movetype + 1;
+      document.getElementById("cry").innerHTML = movetype;
+      if (randmod % 11139 == 0) { //this is a low chance of occurring but completely owns the wizard and is therefore funny
+				dialogue("EVEN OLD MAGICIANS HAVE HEARTS (SOMETIMES). "+wizname.toUpperCase()+" STARTS TO CRY TOO!", "narration");
+				wizhp = wizhp - 100;
+        dialogue("-100!", "damn");
+			}
+			else {
+				wizhp = wizhp - 0;
+				dialogue("-0!", "damn");
+			}
+    } else if (choice == 5) {
+      dialogue(yourname.toUpperCase() + " APPLIED A HELLO KITTY BANDAID!", "narration");
+      var movetype = parseInt(document.getElementById("ahkb").innerHTML);
+      movetype = movetype + 1;
+      var dam = 1 + (randmod%3)
+      document.getElementById("ahkb").innerHTML = movetype;
+      yourhp = yourhp + dam;
+      dialogue("+"+dam+"!", "damp");
+    } 
+    hp();
+    yourturn = 0;
+    document.getElementById("nextbutton").scrollIntoView({behavior:"smooth"});
+  }
+  else if (clicks > 4 && yourturn == 0 && ongoing) {
+    //The wizard's turn
+    var wandmod = Math.floor(Math.random() * 10000000000069);
+    var dam = 0;
+    if (wandmod % 69 == 0) { 
+      dialogue(wizname.toUpperCase() + " SKYPED HIS LONG DISTANCE TWITCH STREAMER GIRLFRIEND VIA HIS ORB!", "narration");
+      dialogue("I DON'T MEAN TO SEX-SHAME BUT SERIOUSLY? RIGHT IN FRONT OF YOUR SALAD?", "narration");
+      dam = 3;
+			yourhp = yourhp - dam;
+			dialogue("-"+dam+"!", "damn");
+		}
+    else if (wandmod % 123 == 0) {
+      dialogue(wizname.toUpperCase() + " ROLLED UP HIS VOLUMINOUS STARRY SLEEVES AND REVEALED THAT HE HAS GUNS! INTIMIDATING!", "narration");
+			dam = 2;
+			yourhp = yourhp - dam;
+      dialogue("-"+dam+"!", "damn");
+      if (wandmod % 2 == 0) {
+        dialogue(wizname.toUpperCase() + " FLEXED SO HARD HE HURT HIMSELF!", "narration");
+			  dam = 7;
+			  wizhp = wizhp - dam;
+        dialogue("-"+dam+"!", "damn");
+      }
+		}
+    else if (wandmod % 17 == 0) {
+      dialogue(wizname.toUpperCase() + " UNLEASHED HIS PET ALLIGATOR ON YOU!", "narration");
+			dam = wandmod % 5;
+      yourhp = yourhp - dam;
+      dialogue("-"+dam+"!", "damn");
+      if ((Math.floor(Math.random() * 169))%3) {
+        somethingrotten = 1;
+        allifriend = "Y";
+      }
+      else if(wandmod%2 == 0) {
+        dialogue("THE SIGHT OF HIS BELOVED PET MOTIVATES HIM TO DO EVEN BETTER!", "narration");
+        dam = 3;
+        wizhp = wizhp + dam;
+        dialogue("+"+dam+"!", "damp");
+      } else {
+        dialogue("THE ALLIGATOR HAS A SORE TOOTH. "+wizname.toUpperCase() + " WAS PLANNING ON TAKING IT TO THE DENTIST'S TODAY, BUT HAS ENDED UP NEGLECTING HIS PET. IT BITES HIM. IT'S MORE OF A NIBBLE, REALLY, BUT HAVE YOU EVER BEEN NIBBLED BY AN ALLIGATOR BEFORE? IT HURTS.", "narration");
+        dam = 5;
+        wizhp = wizhp - dam;
+        dialogue("-"+dam+"!", "damn");
+      }
+		}
+    else if (wandmod % 13 == 0) {
+      dialogue(wizname.toUpperCase() + " SUMMONED A HORDE OF HOMUNCULI!", "narration");
+      dialogue("COUNT HOW MANY HOMUNCULI THERE ARE:", "narration");
+      var output = "<form><input type='text' id='homnumfield'/></form>";
+      game.insertAdjacentHTML("beforeend", output);
+      document.getElementById("nextbutton").scrollIntoView({behavior:"smooth"});
+      somethingrotten = 1;
+        homnum = "-1";
+		}
+    else if (wandmod % 11 == 0) {
+      dialogue(wizname.toUpperCase() + " USED GREATER KETAMINE APE!", "narration");
+			dam = 4;
+			yourhp = yourhp - dam;
+      dialogue("-"+dam+"!", "damn");
+      var movetype = parseInt(document.getElementById("gka").innerHTML);
+      movetype = movetype + 1;
+      document.getElementById("gka").innerHTML = movetype;
+		}
+    else if (wandmod % 7 == 0) {
+      dialogue(wizname.toUpperCase() + " SUMMONED A WET COD!", "narration");
+      if (wandmod%2==0) {
+      somethingrotten = 1;
+        weirdcod = 1;
+      } else {
+        dialogue("THE COD STARTLES YOU SO BADLY THAT YOU JUMP BACK AND TRIP ON A ROCK. NOW YOU'RE CONFUSED BY THIS CHOICE.", "narration");
+        dam = 4;
+			  yourhp = yourhp - dam;
+        dialogue("-"+dam+"!", "damn");
+        if (Math.floor(Math.random() * 3)%2) {
+          dialogue("WELL, IT WORKED, SO IT DOESN'T REALLY MATTER IF I MESSED UP THAT LAST SPELL.", "wiztext");
+        } else {
+          dialogue(wizname.toUpperCase() + " IS STARTLED TOO. HE SLIPS ON THE COD AND FALLS ON THE GROUND.", "narration");
+          dam = 4;
+			    wizhp = wizhp - dam;
+          dialogue("-"+dam+"!", "damn");
+        }
+      }
+		}
+    else if (wandmod % 5 == 0) {
+      dialogue(wizname.toUpperCase() + " USED BLOOD TOAD SUPERIOMERUM!", "narration");
+      dam = 3;
+			yourhp = yourhp - dam;
+      dialogue("-"+dam+"!", "damn");
+      if (wandmod%3 == 0) {
+      somethingrotten = 1;
+        toaddad = 1;
+      }
+      else if (wandmod%2) {
+        dialogue(wizname.toUpperCase() + " IS REJUVENATED BY THE SUPERIORITY OF HIS TOAD!", "narration");
+        dam = 3;
+			  wizhp = wizhp + dam;
+        dialogue("+"+dam+"!", "damp");
+      } else {
+        dialogue("THIS TOAD IS A BIT TOO SUPERIOR. "+ wizname.toUpperCase() + " IS FEELING A BIT INSECURE NOW.", "narration");
+        dialogue("This toad is so cool. How can I ever live up to the expectations of this toad? It would be better if I just laid down in the grass and rotted.", "wiztext");
+        dam = 3;
+			  wizhp = wizhp - dam;
+        dialogue("-"+dam+"!", "damn");
+      }
+    }
+    else if (wandmod % 3 == 0) {
+      dialogue(wizname.toUpperCase() + " CALLED HIS MUM TO HELP HIM OUT! SHE'S GOT A MEAN RIGHT HOOK!", "narration");
+      dam = 2;
+			yourhp = yourhp - dam;
+      dialogue("-"+dam+"!", "damn");
+      var fix = Math.floor(Math.random() * 118);
+      if (fix%113==0) {
+        dialogue("'Why do you keep calling me to beat up your potential students?' his mother asks him when she's done. 'Isn't it about time that you found a nice girl and settled down?'", "narration");
+        dam = 1;
+			  wizhp = wizhp - dam;
+        dialogue("-"+dam+"!", "damn");
+        dialogue("Mother, you know I am bisexual.", "wiztext");
+        dialogue("'Does being a bihexual mean that you have to not be married? Really, "+wizname+ ", surely if you went on one of those nice dating apps--like Castr, maybe, then you could find a nice girl (or boy) and settle down...?'", "narration");
+        dam = 2;
+			  wizhp = wizhp - dam;
+        dialogue("-"+dam+"!", "damn");
+        dialogue("I'D LOVE TO TALK MORE ABOUT THIS MOTHER BUT AS YOU SEE I AM IN THE MIDDLE OF SOMETHING. ISN'T THAT RIGHT, YOUNG " + yourname.toUpperCase() +"?", "wiztext");
+        dialogue("YOU AGREE THAT YOU'RE BOTH TERRIBLY BUSY AND, MIFFED, SHE LEAVES. " +wizname.toUpperCase() + " IS SO GRATEFUL THAT WHEN YOU ASK FOR ONE OF HIS RED BOTTLES HE GIVES YOU ONE.", "narration");
+        dam = 2;
+			  yourhp = yourhp + dam;
+        dialogue("+"+dam+"!", "damp");
+        document.getElementById("biwiz").innerHTML = "Woah, he's bisexual. I didn't know that.";
+      }
+    }
+    else if (wandmod % 2 == 0) {
+      dialogue(wizname.toUpperCase() + " PULLED A FACE AT YOU!", "narration");
+      dam = 1;
+			yourhp = yourhp - dam;
+      dialogue("-"+dam+"!", "damn");
+      wandmod = Math.random() * 3;
+      if (wandmod%3==0) {
+        dialogue(wizname.toUpperCase() + " PULLED A MUSCLE AT THE SAME TIME!", "narration");
+			  dam = 3;
+			  wizhp = wizhp - dam;
+        dialogue("-"+dam+"!", "damn");
+      }
+    }
+    else {
+      dialogue(wizname.toUpperCase() + " TRIPPED OVER HIS VOLUMINOUS WIZARD ROBE!", "narration");
+      var fix = Math.floor(Math.random() * 12);
+      if (fix%2) {
+        dialogue(wizname.toUpperCase() + " ACCIDENTALLY POKED YOU IN THE EYE!", "narration");
+        dam = 1;
+			  yourhp = yourhp - dam;
+        dialogue("-"+dam+"!", "damn");
+      } else {
+        dialogue(wizname.toUpperCase() + " TAKES THIS OPPORTUNITY TO CRACK OPEN ONE OF HIS RED BOTTLES OF WEIRD STUFF! IT GIVES HIM A BOOST!", "narration");
+        dam = 2 + fix%3;
+			  wizhp = wizhp + dam;
+        dialogue("+"+dam+"!", "damp");
+      }
+      if (fix%3) {
+        var movetype = parseInt(document.getElementById("potions").innerHTML);
+        movetype = movetype + 1;
+        document.getElementById("potions").innerHTML = movetype;
+        dialogue("AS HE TRIPS ONE OF HIS BOTTLES COMES FLYING OUT OF HIS ROBE ONTO THE GROUND IN FRONT OF YOU. YOU DECIDE TO TAKE A SIP.", "narration");
+        if (fix%4==1) {
+          dam = 1;
+			    yourhp = yourhp - dam;
+          dialogue("-"+dam+"!", "damn");
+        } else {
+          dam = 2;
+			    yourhp = yourhp + dam;
+          dialogue("+"+dam+"!", "damp");
+        }
+      }
+    }
+    hp();
+    choice = 0;
+    document.getElementById("nextbutton").scrollIntoView({behavior:"smooth"});
+  }
+}
+function init() {
+  document.getElementById("startsplash").style.display = "none";
+  document.getElementById("nextbutton").style.display = "block";
+  hp();
+  document.getElementById("wizname").innerHTML = wizname;
+  var chumor = parseFloat((Math.random() * (5.4 - 4.0) + 4.0));
+    document.getElementById("choleric").innerHTML = chumor.toFixed(2);
+  var phumor = parseFloat((Math.random() * (19.5 - 18.1) + 18.1));
+    document.getElementById("phlegmatic").innerHTML = phumor.toFixed(2);
+  var mhumor = parseFloat((Math.random() * (1.9 - 0.5) + 0.5));
+    document.getElementById("melancholic").innerHTML = mhumor.toFixed(2);
+  var shumor = 100 - (chumor + phumor + mhumor);
+    document.getElementById("sanguine").innerHTML = shumor.toFixed(2);
+  //0.7
+    chumor = chumor-4.7;
+    phumor = phumor-18.8;
+    mhumor = mhumor-1.2;
+    shumor = shumor-75.3;
+  var temp = "";
+  if (chumor > phumor && chumor > mhumor && chumor > shumor) {
+      temp = "Choleric";
+  } else if (phumor > chumor && phumor > mhumor && phumor > shumor) {
+      temp = "Phlegmatic";
+  } else if (mhumor > phumor && mhumor > chumor && mhumor > shumor) {
+      temp = "Melancholic";
+  } else {
+      temp = "Sanguine";
+  }
+  document.getElementById("temperament").innerHTML = temp;
+  document.getElementById("winner").innerHTML = "Ongoing";
+  dialogue("NO ONE can enter this wizarding school without BEATING ME!!!!\nI AM THE MAGICIAN "+wizname.toUpperCase() +" and I challenge you to a DUEL!!!!!", "wiztext");
+  document.getElementById("nextbutton").scrollIntoView({behavior:"smooth"});
+}
+
+console.log("Patch notes 9.7.23: Fixed some wording");
+</script>
